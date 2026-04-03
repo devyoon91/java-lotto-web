@@ -9,7 +9,7 @@ const RANK_LABELS = {
   SECOND: { label: '2등', prize: '3천만원', emoji: '🥈' },
   THIRD:  { label: '3등', prize: '150만원', emoji: '🥉' },
   FOURTH: { label: '4등', prize: '5만원',  emoji: '🎖' },
-  FIFTH:  { label: '5등', prize: '5천원',  emoji: '🎗' },
+  FIFTH:  { label: '5등', prize: '5천원',  emoji: '🍀' },
   MISS:   { label: '꽝',  prize: '0원',    emoji: '😢' },
 }
 
