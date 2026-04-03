@@ -18,14 +18,16 @@ public class LottoVendingMachine {
 
     private LottoVendingMachine() {}
 
-    public static Lottos buyLottery(List<String> manualLotto,int lottoPurchaseCost) {
-        List<Lotto> lottoList = getLottoList(lottoPurchaseCost);
+    public static Lottos buyLottery(List<String> manualLotto, int lottoPurchaseCost) {
+        int manualCount = manualLotto.size();
+        int autoCost = lottoPurchaseCost - (manualCount * LOTTO_PRICE);
+        List<Lotto> lottoList = autoCost > 0 ? getLottoList(autoCost) : new LinkedList<>();
         lottoList.addAll(manualLottoList(manualLotto));
         return new Lottos(lottoList);
     }
 
     public static List<LottoResult> lottoWinningResults(Lottos lottos, String winningNumber, int bonusNumber) {
-        return getLottoResultList(lottos,winningNumber,bonusNumber);
+        return getLottoResultList(lottos, winningNumber, bonusNumber);
     }
 
     private static List<Lotto> manualLottoList(List<String> manualLotto) {
@@ -36,20 +38,20 @@ public class LottoVendingMachine {
 
     private static Lotto manualLotto(String lottoNumber) {
         List<LottoNumber> lottoNumbers = Arrays.stream(lottoNumber.split(LOTTO_NUMBER_SEPARATOR))
-                .map(e -> LottoNumber.of(Integer.parseInt(e)))
+                .map(e -> LottoNumber.of(Integer.parseInt(e.trim())))
                 .collect(Collectors.toList());
-        return new Lotto(lottoNumbers,false);
+        return new Lotto(lottoNumbers, false);
     }
 
     private static List<LottoResult> getLottoResultList(Lottos lottos, String winningNumber, int bonusNumber) {
         return lottos.getLottos().stream()
-                .map(e -> LottoResult.check(e,winningNumber,bonusNumber))
+                .map(e -> LottoResult.check(e, winningNumber, bonusNumber))
                 .collect(Collectors.toList());
     }
 
     private static List<Lotto> getLottoList(int price) {
         List<Lotto> lottoList = new LinkedList<>();
-        IntStream.rangeClosed(1,getCount(price))
+        IntStream.rangeClosed(1, getCount(price))
                 .forEach(i -> lottoList.add(new Lotto(getLottoNumberList())));
         return lottoList;
     }
