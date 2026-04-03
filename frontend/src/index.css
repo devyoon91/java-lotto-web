@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* { font-family: "Noto Sans KR", sans-serif; }
+
+@keyframes ballPop {
+  0% { transform: scale(0) rotate(-180deg); opacity: 0; }
+  70% { transform: scale(1.2) rotate(10deg); }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(20px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+.ball-pop { animation: ballPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+.shimmer-text {
+  background: linear-gradient(90deg, #ffd700, #ff6b6b, #ffd700, #ff6b6b);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 2s linear infinite;
+}
+.float-up { animation: floatUp 0.6s ease forwards; }
