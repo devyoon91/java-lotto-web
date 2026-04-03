@@ -37,7 +37,7 @@ export default function BuyStep({ onComplete }) {
       })
       onComplete(res.data, purchaseAmount)
     } catch (e) {
-      setError('구매 중 오류가 발생했습니다')
+      setError(e.response?.data?.message || '구매 중 오류가 발생했습니다')
     } finally {
       setLoading(false)
     }
